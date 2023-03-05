@@ -1,4 +1,4 @@
-package main
+package gradingservice
 
 import (
 	"context"
@@ -10,12 +10,11 @@ import (
 )
 
 func main() {
-	log.Run("./distributed.log")
-	host, port := "localhost", "4000"
+	host, port := "localhost", "6000"
 	serviceAddress := fmt.Sprintf("http://%s:%s", host, port)
 
 	r := registry.Registration{
-		ServiceName: registry.LogService,
+		ServiceName: registry.GradingService,
 		ServiceURL:  serviceAddress,
 	}
 	ctx, err := service.Start(
@@ -32,5 +31,5 @@ func main() {
 
 	<-ctx.Done()
 
-	fmt.Println("Shutting down " + registry.LogService)
+	fmt.Println("Shutting down " + registry.GradingService)
 }
