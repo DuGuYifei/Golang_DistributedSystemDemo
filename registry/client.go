@@ -12,8 +12,16 @@ import (
 )
 
 func RegisterService(r Registration) error {
-	ServiceUpdateURL, err := url.Parse(r.ServiceUpdateURL)
+	heartbeatURL, err := url.Parse(r.HeartbeatURL)
+	if err != nil {
+		return err
+	}
 
+	http.HandleFunc(heartbeatURL.Path, func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
+
+	ServiceUpdateURL, err := url.Parse(r.ServiceUpdateURL)
 	if err != nil {
 		return err
 	}
