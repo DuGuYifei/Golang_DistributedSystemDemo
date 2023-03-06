@@ -10,6 +10,7 @@ type Registration struct {
 const (
 	LogService     = ServiceName("LogService")
 	GradingService = ServiceName("GradingService")
+	PortalService  = ServiceName("Portal")
 )
 
 type patchEntry struct {

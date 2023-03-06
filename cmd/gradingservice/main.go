@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"distributed/grades"
 	"distributed/log"
 	"distributed/registry"
 	"distributed/service"
@@ -24,7 +25,7 @@ func main() {
 		host,
 		port,
 		r,
-		log.RegisterHandlers,
+		grades.RegisterHandlers,
 	)
 
 	if err != nil {
