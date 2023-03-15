@@ -24,8 +24,10 @@ func (cl clientLogger) Write(data []byte) (int, error) {
 	return len(data), nil
 }
 
-func SetClientLogger(serviceURL string, clientService registry.ServiceName) {
+func SetClientLogger(serviceURL string, clientService registry.ServiceName) clientLogger {
 	stlog.SetPrefix(fmt.Sprintf("[%v] - ", clientService))
 	stlog.SetFlags(0)
-	stlog.SetOutput(&clientLogger{url: serviceURL})
+	logger := &clientLogger{url: serviceURL}
+	stlog.SetOutput(logger)
+	return *logger
 }

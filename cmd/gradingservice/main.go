@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	host, port := "localhost", "6000"
+	host, port := "localhost", "8082"
 	serviceAddress := fmt.Sprintf("http://%s:%s", host, port)
 
 	r := registry.Registration{
@@ -35,7 +35,8 @@ func main() {
 
 	if logProvider, err := registry.GetProvider(registry.LogService); err == nil {
 		fmt.Printf("Logging service found at: %s\n", logProvider)
-		log.SetClientLogger(logProvider, r.ServiceName)
+		logger := log.SetClientLogger(logProvider, r.ServiceName)
+		logger.Write(([]byte)("grading add log service"))
 	}
 
 	<-ctx.Done()
